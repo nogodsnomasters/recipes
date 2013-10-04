@@ -13,10 +13,12 @@ class Recipe
   end
    
   def self.get_recipe
-    puts "Please enter the title of your recipe"
+
+    puts "Please enter the title of your recipe:"
+
     title = gets.chomp
 
-    puts "Please describe this recipe"
+    puts "Please describe this recipe:"
     description = gets.chomp
   
     Recipe.new(title, description)
