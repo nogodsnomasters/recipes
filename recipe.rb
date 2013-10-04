@@ -8,6 +8,10 @@ class Recipe
     "#{@title}\n#{@description}" 
   end 
   
+  def one_line
+    "#{@title}: #{@description}"
+  end
+   
   def self.get_recipe
     puts "Please title your recipe"
     title = gets.chomp
