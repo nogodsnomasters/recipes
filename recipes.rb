@@ -8,6 +8,7 @@ recipes = []
 puts "what would you like to do?"
 
 loop do
+  puts "type 'list' show recipes"
   puts "type 'add' to add a recipe"
   puts "type 'remove' to remove a recipe"
   puts "type 'update' to update a recipe"
@@ -16,6 +17,8 @@ loop do
   choice = gets.chomp
 
   case choice
+  when "list"
+    puts recipes
   when "add"
     recipes << Recipe.get_recipe
  
