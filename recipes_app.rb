@@ -46,7 +46,25 @@ class RecipesApp
         puts "#{i} has been removed from database"
       
       when "update"
-    
+        puts "which recipe would you like to update?"
+        
+        list
+        
+        selection = gets.chomp.to_i
+        
+        recipe = @recipes[selection - 1]
+        puts "the old title is #{recipe.title}. enter a new title or leave blank to keep current title."
+        
+        input = gets.chomp
+        
+        recipe.title = input if !input.empty?
+        
+        puts "the old description is #{recipe.description}. enter a new description or leave blank to keep current description."
+        
+        input = gets.chomp
+        
+        recipe.description = input if !input.empty?
+         
       when "exit"
         break
       else 
