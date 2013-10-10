@@ -24,6 +24,7 @@ class RecipesApp
       puts "type 'add' to add a recipe"
       puts "type 'remove' to remove a recipe"
       puts "type 'update' to update a recipe"
+      puts "type 'show' to show a full recipe"
       puts "type 'exit' to exit"
   
       choice = gets.chomp
@@ -64,6 +65,17 @@ class RecipesApp
         input = gets.chomp
         
         recipe.description = input if !input.empty?
+      
+      when "show"
+        puts "which recipe would you like to show"
+        
+        list
+        
+        selection = gets.chomp.to_i
+        
+        recipe = @recipes[selection - 1]
+        
+        puts recipe
          
       when "exit"
         break
