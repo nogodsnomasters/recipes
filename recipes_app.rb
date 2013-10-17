@@ -12,6 +12,40 @@ class RecipesApp
     end 
   end
   
+  def get_ingredients
+    ingredients = []
+    loop do
+      puts "please add an ingredient or type 'done' to finish"
+      ingredient = gets.chomp
+      
+      if ingredient != "done"
+
+       puts "how much do you use"
+        quantity = gets.chomp
+
+        begin
+          ingredients << IngredientItem.new(ingredient, quantity)
+        rescue StandardError => error
+          puts error.message
+        end
+      else 
+        break  
+      end 
+    end
+    
+   ingredients.to_s
+  end
+  
+  def get_recipe
+
+    puts "Please enter the title of your recipe:"
+    title = gets.chomp
+
+    puts "Please describe this recipe:"
+    description = gets.chomp
+    
+    Recipe.new(title, description, get_ingredients)
+  end
   
   def run!
     puts "welcome to the recipe database"
@@ -33,18 +67,19 @@ class RecipesApp
       when "list"
         list
       when "add"
-        @recipes << Recipe.get_recipe
- 
+        @recipes << get_recipe
+        
+        
       when "remove"
         puts "which recipe would you like to remove" 
   
         list
     
         remove = gets.chomp
-        i = remove.to_i
+        selection = remove.to_i
   
-        @recipes.delete_at(i - 1)
-        puts "#{i} has been removed from database"
+        @recipes.delete_at(selection - 1)
+        puts "#{selection} has been removed from database"
       
       when "update"
         puts "which recipe would you like to update?"
@@ -58,7 +93,7 @@ class RecipesApp
         
         input = gets.chomp
         
-        recipe.title = input if !input.empty?
+        recipe.title = input if !input.empty? # ! here means "not" or "if input is not empty"
         
         puts "the old description is #{recipe.description}. enter a new description or leave blank to keep current description."
         
@@ -67,6 +102,7 @@ class RecipesApp
         recipe.description = input if !input.empty?
       
       when "show"
+        
         puts "which recipe would you like to show"
         
         list
@@ -79,11 +115,10 @@ class RecipesApp
          
       when "exit"
         break
+        
       else 
         puts "try again"
       end 
     end
-
-    list
   end
 end
